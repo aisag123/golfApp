@@ -9,6 +9,7 @@ class Player:
         self.GIR = 0
         self.FH = 0
         self.putts = 0
+        self.date = ""
 
 
     def SetPlayerName(self, first, last):
@@ -36,5 +37,21 @@ class Player:
     def GetGIR(self):
         return
 
+    def SetFH(self, fh):
+        self.FH = fh
+
+    def GetFH(self):
+        return
+
     def SetPutts(self, putts):
         self.putts = putts
+
+    def GetPutts(self):
+        return
+    
+    def SetDate(self, date):
+        self.date = date
+
+    def getDate(self):
+        return
+    
