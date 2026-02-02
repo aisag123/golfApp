@@ -2,7 +2,7 @@
 # stats engine fot the golf app
 from sqlalchemy import null
 from app.models.course import Course
-from app.models.player import Player
+from app.models.round import Player
 
 class StatsEngine:
     #(best 8 / 20? - Course Rating) x 113 / Slope Rating

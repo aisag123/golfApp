@@ -22,12 +22,3 @@ class Course:
     def GetCourseInfo(self):
         if self.courseName == "" or self.location == "":
             return None
-        else: 
-            return {
-                "name: ": self.courseName,
-                "location: ": self.courseName,
-                "slope: ": self.slopeRating,
-                "rating: ": self.courseRating,
-                "par: ": self.coursePar,
-                "holes: ": self.courseHoles
-            }
