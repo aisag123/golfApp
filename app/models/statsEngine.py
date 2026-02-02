@@ -1,8 +1,8 @@
 #created by Aiden Sagaser on 2023-10-05
 # stats engine fot the golf app
 from sqlalchemy import null
-from app.models.course import Course
-from app.models.round import Player
+from models.course import Course
+from models.round import Player
 
 class StatsEngine:
     #(best 8 / 20? - Course Rating) x 113 / Slope Rating

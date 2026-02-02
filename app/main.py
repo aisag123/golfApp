@@ -2,20 +2,28 @@ from fastapi import FastAPI, HTTPException, Depends
 from typing import Annotated, List
 from sqlalchemy.orm import Session
 from pydantic import BaseModel 
-from app.models.backend import SessionLocal, engine #importing the database connection
-import app.models.connection as models
+from models.backend import SessionLocal, engine #importing the database connection
+import models.connection as models
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
 origins = [
-    'http://127.0.0.1:8000'
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+    '*'  # Allow all origins for development
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
+app.mount("/static", StaticFiles(directory="html"), name="static")
 
 class RoundBase(BaseModel):
     f_name: str
