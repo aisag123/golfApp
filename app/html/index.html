@@ -1,58 +1,113 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Golf App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="format.css" />
   </head>
   <body>
-    <nav class="topnav">
-      <a href="" class="left"><img src="images/icon.png" alt="Image" /></a>
-      <a href="" class="right">Saved Rounds</a>
-      <a href="" class="right">Stats</a>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Home</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="add_score.html">Add Score</a>
+            </li>
+            <li>
+              <a class="nav-link" href="rounds.html">View Rounds</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="stats.html">Stats</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="calculate_strokes.html"
+                >Calculate Strokes</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
+    <div class="bg-light p-5 text-center">
+      <h1>Welcome to AS Golf</h1>
+      <p class="lead">
+        AS Golf is a simple golf score tracking app. Add your completed rounds
+        and view your stats.
+      </p>
+      <a href="#cards"><button class="btn btn-dark">Get Started</button></a>
+    </div>
 
     <div class="head">
       <img src="images/golfHead.jpg" alt="GOLf" />
     </div>
 
-    <div class="input score">
-      <h1>Add Completed Round</h1>
-    </div>
-
-    <div class="container">
-      <div class="input f_name">
-        <label for="f_name">First Name:</label>
-        <input type="text" id="f_name" required />
-      </div>
-      <div class="input l_name">
-        <label for="l_name">Last Name</label>
-        <input type="text" id="l_name" />
-      </div>
-      <div class="input holes">
-        <label for="holes">Holes Played</label>
-        <input type="text" id="holes" required />
-      </div>
-      <div class="input score">
-        <label for="score">Round Score</label>
-        <input type="text" id="round score" />
-      </div>
-      <div class="input gir">
-        <label for="gir">GIR</label>
-        <input type="text" id="gir" />
-      </div>
-      <div class="input putts">
-        <label for="putts">Putts</label>
-        <input type="text" id="putts" />
-      </div>
-      <div class="input date">
-        <label for="date">Date</label>
-        <input type="date" id="date" />
-      </div>
-      <div class="submit">
-        <button type="submit">Submit Round</button>
+    <div id="cards" class="container mt-4">
+      <div class="row justify-content-center g-4">
+        <div class="col-md-4">
+          <div class="card h-100">
+            <img src="images/putt.jpg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Track Scores</h5>
+              <p class="card-text">
+                Add completed rounds to track your scores and stats over time.
+              </p>
+              <a href="add_score.html" class="btn btn-dark">Go to Add Scores</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100">
+            <img src="images/green.jpg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">View Stats</h5>
+              <p class="card-text">
+                View and track your stats over time. See how you are improving
+                and identify areas for improvement.
+              </p>
+              <a href="stats.html" class="btn btn-dark">Go to Stats</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100">
+            <img src="images/ball-tee.jpg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Calculate Strokes</h5>
+              <p class="card-text">
+                See how many strokes you should give or receive when playing
+                with a different handicap.
+              </p>
+              <a href="calculate_strokes.html" class="btn btn-dark"
+                >Go to Calculate Strokes</a
+              >
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"
+  ></script>
 </html>
