@@ -75,6 +75,14 @@
         <label for="putts">Putts</label>
         <input class="form-control" type="text" id="putts" />
       </div>
+      <div class="input fh">
+        <label for="fh">FH</label>
+        <input class="form-control" type="text" id="fh" />
+      </div>
+      <div class="input course">
+        <label for="course">Course Name</label>
+        <input class="form-control" type="text" id="course" />
+      </div>
       <div class="input date">
         <label for="date">Date</label>
         <input class="form-control" type="date" id="date" />
@@ -133,9 +141,11 @@
             l_name: document.getElementById("l_name").value,
             holes_played: parseInt(document.getElementById("holes").value),
             round_score: parseInt(document.getElementById("round score").value),
+            FH: parseInt(document.getElementById("fh").value),
             GIR: parseInt(document.getElementById("gir").value),
             putts: parseInt(document.getElementById("putts").value),
             date: document.getElementById("date").value,
+            course_name: document.getElementById("course").value,
           };
 
           // Validate required fields
@@ -157,38 +167,7 @@
             });
 
             if (response.ok) {
-              const result = await response.json();
-
-              // Display stats
-              const stats = result.stats;
-              document.getElementById("totalRounds").textContent =
-                stats.total_rounds;
-              document.getElementById("avgScore").textContent =
-                stats.average_score;
-              document.getElementById("bestScore").textContent =
-                stats.best_score;
-              document.getElementById("worstScore").textContent =
-                stats.worst_score;
-              document.getElementById("avgGir").textContent = stats.average_gir;
-              document.getElementById("avgPutts").textContent =
-                stats.average_putts;
-              document.getElementById("lastScore").textContent =
-                stats.last_round_score;
-              document.getElementById("lastGir").textContent =
-                stats.last_round_gir;
-              document.getElementById("lastPutts").textContent =
-                stats.last_round_putts;
-
-              // Show handicap if available
-              if (stats.handicap) {
-                document.getElementById("handicap").textContent =
-                  stats.handicap;
-                document.getElementById("handicapDisplay").style.display =
-                  "block";
-              }
-
-              // Show stats section
-              document.getElementById("statsSection").style.display = "block";
+              alert("Round submitted successfully!");
 
               // Clear the form
               document.getElementById("f_name").value = "";

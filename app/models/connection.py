@@ -21,6 +21,11 @@ class Round(Base): #this is setting up a players round saved to the DB
     GIR = Column(Integer)
     FH = Column(Integer)
     putts = Column(Integer)
+    course_name = Column(String)
+    rating = Column(Float)
+    slope = Column(Integer)
+    tee = Column(String)
+    differantial = Column(Float)
     date = Column(String)
 
 
