@@ -3,6 +3,11 @@ from sqlalchemy import null
 from models.course import Course
 from models.round import Player
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from .env file
+
 
 class StatsEngine:
     #(best 8 / 20? - Course Rating) x 113 / Slope Rating
@@ -60,7 +65,7 @@ class StatsEngine:
         return stats
 
     def getcourseInfo(self, course_name, tee):
-        api_key = "7N4KAYZLE5FZBSAEMPYUJJCWDI"
+        api_key = os.getenv("API_KEY")
         url = f"https://api.golfcourseapi.com/v1/search?search_query={course_name}"
 
         headers = {
