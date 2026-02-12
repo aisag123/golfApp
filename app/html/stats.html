@@ -59,7 +59,9 @@
     <script>
       async function loadStats() {
         try {
-          const response = await fetch("http://192.168.4.1:8000/overall-stats");
+          const response = await fetch(
+            "http://192.168.4.185:8000/overall-stats",
+          );
           if (response.ok) {
             const stats = await response.json();
             displayStats(stats);
