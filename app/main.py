@@ -11,10 +11,11 @@ import os
 
 app = FastAPI()
 
+# Only allow requests from VPN subnet
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for development
-    allow_credentials=False,  # Must be False when allow_origins is ["*"]
+    allow_origins=["http://10.49.250.1:8000"],  # Your VPN IP
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
