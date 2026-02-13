@@ -1,4 +1,4 @@
-from models.backend import Base #importing the database connection base
+from app.models.backend import Base #importing the database connection base
 from sqlalchemy import Boolean, Column, Integer, String, Float
 
     # firstName 

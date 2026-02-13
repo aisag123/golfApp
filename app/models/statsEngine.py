@@ -1,7 +1,7 @@
 #created by Aiden Sagaser on 2023-10-05
 from sqlalchemy import null
-from models.course import Course
-from models.round import Player
+from app.models.course import Course
+from app.models.round import Player
 import requests
 import os
 from dotenv import load_dotenv
