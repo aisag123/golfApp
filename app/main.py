@@ -2,11 +2,11 @@ from fastapi import FastAPI, HTTPException, Depends
 from typing import Annotated, List, Optional
 from sqlalchemy.orm import Session
 from pydantic import BaseModel 
-from models.backend import SessionLocal, engine #importing the database connection
-import models.connection as models
+from app.models.backend import SessionLocal, engine #importing the database connection
+import app.models.connection as models
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from models.statsEngine import StatsEngine
+from app.models.statsEngine import StatsEngine
 
 app = FastAPI()
 
