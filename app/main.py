@@ -7,6 +7,7 @@ import app.models.connection as models
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from app.models.statsEngine import StatsEngine
+import os
 
 app = FastAPI()
 
@@ -24,7 +25,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/static", StaticFiles(directory="html"), name="static")
+# Get the directory where this file is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "html")), name="static")
 
 class RoundBase(BaseModel):
     f_name: str
