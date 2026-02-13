@@ -32,7 +32,7 @@
             <li class="nav-item">
               <a class="nav-link" href="add_score.html">Add Score</a>
             </li>
-            <li>
+            <li class="nav-item">
               <a class="nav-link" href="rounds.html">View Rounds</a>
             </li>
             <li class="nav-item">
@@ -158,7 +158,7 @@
 
           try {
             // Send data to backend
-            const response = await fetch("http://192.168.4.1:8000/Round", {
+            const response = await fetch("http://192.168.4.185:8000/Round", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
