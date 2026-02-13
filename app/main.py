@@ -11,16 +11,10 @@ import os
 
 app = FastAPI()
 
-origins = [
-    'http://127.0.0.1:8000',
-    'http://localhost:8000',
-    '*'  # Allow all origins for development
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
+    allow_origins=["*"],  # Allow all origins for development
+    allow_credentials=False,  # Must be False when allow_origins is ["*"]
     allow_methods=["*"],
     allow_headers=["*"],
 )
