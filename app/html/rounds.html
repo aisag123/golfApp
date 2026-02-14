@@ -62,7 +62,7 @@
     <script>
       async function loadRounds() {
         try {
-          const response = await fetch("http://192.168.4.185:8000/rounds");
+          const response = await fetch("http://localhost:8000/rounds");
           if (response.ok) {
             const rounds = await response.json();
             displayRounds(rounds);
@@ -100,7 +100,7 @@
           )
         ) {
           try {
-            const response = await fetch("http://192.168.4.185:8000/rounds", {
+            const response = await fetch("http://localhost:8000/rounds", {
               method: "DELETE",
             });
             if (response.ok) {

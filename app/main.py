@@ -13,8 +13,7 @@ app = FastAPI()
 
 origins = [
     'http://127.0.0.1:8000',
-    'http://localhost:8000',
-    '*'  # Allow all origins for development
+    'http://localhost:8000'
 ]
 
 app.add_middleware(
@@ -24,10 +23,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Get the directory where this file is located
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "html")), name="static")
 
 class RoundBase(BaseModel):
     f_name: str
