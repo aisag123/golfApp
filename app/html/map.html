@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Golf Course Map</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
     <style>
       html,
@@ -26,60 +24,65 @@
   <body>
     <div id="map"></div>
 
-    <!-- prettier-ignore -->
-    <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
-        ({key: "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8", v: "weekly"});</script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-      let map;
-      async function initMap() {
-        const { Map } = await google.maps.importLibrary("maps");
-        const { AdvancedMarkerElement } =
-          await google.maps.importLibrary("marker");
+      const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
 
-        // Default location (fallback if geolocation fails)
-        let defaultLocation = { lat: 46.8772, lng: -96.7898 }; // Fargo, ND
+      // Create a session for Google tiles
+      let session = "";
 
-        map = new Map(document.getElementById("map"), {
-          center: defaultLocation,
-          zoom: 12,
-          mapId: "DEMO_MAP_ID",
-        });
+      let map = L.map("map").setView(
+        [46.92810857320751, -96.7672371045954],
+        18, //zoom level
+      );
 
-        // Try to get user's location
+      // Google satellite tile layer
+      L.tileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
+        attribution: "&copy; Google",
+        maxZoom: 22,
+      }).addTo(map);
+
+      // Create a circle marker for user location
+      let locationMarker = null;
+
+      function updateLocation() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             (position) => {
-              const userLocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-              };
+              const userLocation = [
+                position.coords.latitude,
+                position.coords.longitude,
+              ];
 
-              // Center map on user's location
-              map.setCenter(userLocation);
-              map.setZoom(15);
+              if (locationMarker) {
+                // Update existing marker position
+                locationMarker.setLatLng(userLocation);
+              } else {
+                // Create new circle marker
+                locationMarker = L.circleMarker(userLocation, {
+                  radius: 8,
+                  fillColor: "#4285F4",
+                  color: "#ffffff",
+                  weight: 2,
+                  opacity: 1,
+                  fillOpacity: 0.8,
+                }).addTo(map);
 
-              // Add marker at user's location
-              new AdvancedMarkerElement({
-                map: map,
-                position: userLocation,
-                title: "Your Location",
-              });
+                // Center map on first location
+                map.setView(userLocation, 18);
+              }
             },
             (error) => {
               console.log("Geolocation error:", error);
-              alert("Could not get your location. Showing default location.");
             },
           );
-        } else {
-          alert("Geolocation is not supported by your browser.");
         }
       }
-      initMap();
+
+      // Update location immediately
+      updateLocation();
+
+      setInterval(updateLocation, 10000); //update every 10 seconds
     </script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>
