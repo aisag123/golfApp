@@ -1,12 +1,14 @@
       const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       let map;
       let holesData;
+      let marker;
+      ip = "192.168.4.185"
 
       async function initMap() {
         // Fetch known holes
-        const response = await fetch("http://localhost:8000/known-holes");
+        const response = await fetch("http://" + ip + ":8000/known-holes");
         holesData = await response.json();
-        const holeLocation = holesData["edgewood"]; //hard code edgewood for now, will need to be dynamic later
+        // const holeLocation = holesData["edgewood"]; //hard code edgewood for now, will need to be dynamic later
 
         const searchLat = localStorage.getItem('courseLat');
         const searchLon = localStorage.getItem('courseLon');
@@ -44,11 +46,37 @@
             },
           ).addTo(map);
 
+          const customIcon = L.icon({
+            iconUrl: 'images/map-marker-circle-32.png',
+            iconSize: [40, 40],      // size of the icon
+            iconAnchor: [20, 40],    // point of the icon which corresponds to marker's location
+            popupAnchor: [1, -34],   // point from which the popup should open relative to the iconAnchor
+        });
+
           map.on('click', function(e) {
             const lat = e.latlng.lat;
             const lon = e.latlng.lng;
-            console.log("lat lon click on map: " + lat + ", " + lon);
-          });
+            // console.log("lat lon click on map: " + lat + ", " + lon);
+            
+            // if (marker) {
+            //     map.removeLayer(marker);
+            // }
+            
+            marker = L.marker([lat, lon], {icon: customIcon}).addTo(map);
+
+            startCoordinate = L.latLng(46.92850874321839, -96.76737036168598); //default for testing
+            endCoordinate = L.latLng(lat, lon); //last click
+
+            var distanceyards = startCoordinate.distanceTo(endCoordinate);
+                console.log(distanceyards * 1.09361+ "yards"); // distance from 1 tee yards
+
+            startcoord2 = L.latLng(lat, lon);
+            const hole1 = holesData["edgewood"]["hole1"]; //need to add the green on this 
+            endcoord2 = L.latLng(hole1["green"].lat, hole1["green"].lon);
+
+            var distanceToHole = startcoord2.distanceTo(endcoord2);
+                console.log("distance to hole 1: " + distanceToHole * 1.09361); //yards
+            });
 
         } catch (error) {
           console.error("Error creating session:", error);
