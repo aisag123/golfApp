@@ -11,10 +11,9 @@ import os
 
 app = FastAPI()
 
-# Only allow requests from VPN subnet
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://10.49.250.1:8000"],  # Your VPN IP
+    allow_origins=["http://localhost:8000", "http://127.0.0.1:8000", "http://10.49.250.1:8000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -83,3 +82,9 @@ async def delete_all_rounds(db: db_dependency):
     db.query(models.Round).delete()
     db.commit()
     return {"message": "All rounds deleted"}
+
+@app.get("/known-holes")
+async def get_holes():
+    engine = StatsEngine()
+    holes = engine.postKnownHoles()
+    return holes

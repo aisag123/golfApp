@@ -64,6 +64,45 @@ class StatsEngine:
         }
         return stats
 
+    def postKnownHoles(self):
+        courses = {
+            "edgewood": {
+                "hole1": {
+                    "lat": 46.92851562839663, "lon": -96.76735884111095
+                },
+                "hole2": {
+                    "lat": 46.92896748640711, "lon": -96.77239847667623
+                },
+                "hole3": {
+                    "lat": 46.926018210028985, "lon": -96.77374971229406
+                },
+                "hole4" : {
+                    "lat": 46.925166144962205, "lon": -96.77612135690018
+                },
+                "hole5": {
+                    "lat": 46.92834266884776, "lon": -96.7733817480483
+                },
+                "hole6": {
+                    "lat": 46.93048333169377, "lon": -96.77097121151373
+                },
+                "hole6": {
+                    "lat": 46.92890042914945, "lon": -96.76728650904323
+                },
+                "hole7": {
+                    "lat": 46.928890073164986, "lon": -96.76723722412136
+                },
+                "hole8": {
+                    "lat": 46.930609138863296, "lon": -96.77075920061206
+                },
+                "hole9": {
+                    "lat": 46.931971042288566, "lon": -96.76839496565334
+                }
+            }
+        }
+        # print("Edgewood Home5: " + courses["edgewood"])
+        return courses
+
+
     def getcourseInfo(self, course_name, tee):
         api_key = os.getenv("API_KEY")
         url = f"https://api.golfcourseapi.com/v1/search?search_query={course_name}"
