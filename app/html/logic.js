@@ -1,10 +1,13 @@
-      const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
+const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       let map;
       let holesData;
-      let marker;
+      let marker; //var for current location marker
+      // let tee; //var for tee marker
+      let green; //var for green marker
       ip = "192.168.4.185"
-      let HN;
-      
+      let HN = "hole1"; //global hole number variable to be used in distance functions
+      // let holemarker; // declare globally so it can be accessed in multiple functions
+      let flag; // declare globally so it can be accessed in multiple functions
 
       async function initMap() {
         // Fetch known holes
@@ -50,10 +53,24 @@
 
           const customIcon = L.icon({
             iconUrl: 'images/map-marker-circle-32.png',
-            iconSize: [40, 40],      // size of the icon
+            iconSize: [40, 40],
             iconAnchor: [20, 40],    // point of the icon which corresponds to marker's location
-            popupAnchor: [1, -34],   // point from which the popup should open relative to the iconAnchor
+            popupAnchor: [1, -40],   // point from which the popup should open relative to the iconAnchor
         });
+
+          // holemarker = L.icon({
+          //   iconUrl: "images/tee.png", // Replace with the path to your hole marker image
+          //   iconSize: [40, 50],      // size of the icon
+          //   iconAnchor: [20, 50],    // bottom center of the icon
+          //   popupAnchor: [0, -50],   // popup above the marker
+          // });
+
+          flag = L.icon({
+            iconUrl: "images/flag.png",
+            iconSize: [50, 50],
+            iconAnchor: [25, 50],
+            popupAnchor: [0, -50],
+          });
 
           map.on('click', function(e) {
             const lat = e.latlng.lat;
@@ -69,6 +86,9 @@
             getDistanceFromGreen(holesData, lat, lon)
           });
 
+          // tee = L.marker([holesData["edgewood"][HN].lat, holesData["edgewood"][HN].lon], {icon: holemarker}).addTo(map);
+          // green = L.marker([holesData["edgewood"][HN]["green"].lat, holesData["edgewood"][HN]["green"].lon], {icon: flag}).addTo(map);
+
         } catch (error) {
           console.error("Error creating session:", error);
           // Fallback to basic Google tiles
@@ -82,8 +102,17 @@
       function moveToHole(holeNumber) {
         if (!holesData || !map) return;
         HN = holeNumber;
+        console.log(HN);
         var hole = holesData["edgewood"][holeNumber];
         if (hole) {
+          // if (tee ) {
+          //   map.removeLayer(tee);
+          // }
+          // tee = L.marker([hole.lat, hole.lon], {icon: holemarker}).addTo(map);
+          if (green) {
+            map.removeLayer(green);
+          }
+          green = L.marker([hole["green"].lat, hole["green"].lon], {icon: flag}).addTo(map);
           map.setView([hole.lat, hole.lon], 19);
         }
       }
