@@ -3,6 +3,8 @@
       let holesData;
       let marker;
       ip = "192.168.4.185"
+      let HN;
+      
 
       async function initMap() {
         // Fetch known holes
@@ -63,20 +65,9 @@
             // }
             
             marker = L.marker([lat, lon], {icon: customIcon}).addTo(map);
-
-            startCoordinate = L.latLng(46.92850874321839, -96.76737036168598); //default for testing
-            endCoordinate = L.latLng(lat, lon); //last click
-
-            var distanceyards = startCoordinate.distanceTo(endCoordinate);
-                console.log(distanceyards * 1.09361+ "yards"); // distance from 1 tee yards
-
-            startcoord2 = L.latLng(lat, lon);
-            const hole1 = holesData["edgewood"]["hole1"]; //need to add the green on this 
-            endcoord2 = L.latLng(hole1["green"].lat, hole1["green"].lon);
-
-            var distanceToHole = startcoord2.distanceTo(endcoord2);
-                console.log("distance to hole 1: " + distanceToHole * 1.09361); //yards
-            });
+            getDistanceFromTee(holesData, lat, lon)
+            getDistanceFromGreen(holesData, lat, lon)
+          });
 
         } catch (error) {
           console.error("Error creating session:", error);
@@ -90,7 +81,8 @@
 
       function moveToHole(holeNumber) {
         if (!holesData || !map) return;
-        const hole = holesData["edgewood"][`hole${holeNumber}`];
+        HN = holeNumber;
+        var hole = holesData["edgewood"][holeNumber];
         if (hole) {
           map.setView([hole.lat, hole.lon], 19);
         }
@@ -114,7 +106,7 @@
         return data;
       }
 
-      function getLatLon(courseData) {
+      function getLatLon(courseData) { //start round button stores local starting points
         course = courseData["courses"][0];
 
         lat = course["location"]["latitude"];
@@ -123,4 +115,26 @@
         localStorage.setItem('courseLat', lat) //store local use when map is made
         localStorage.setItem('courseLon', lon) //store local use when map is made
         window.location.href = 'map.html';
+      }
+
+      function getDistanceFromTee(holesData, latC, lonC) {
+        var course = holesData["edgewood"]; //hard coded edgewood here
+        var courseHole = course[HN]; //grabs from global
+        var startCoordinate = L.latLng(courseHole.lat, courseHole.lon) //test
+        var endCoordinate = L.latLng(latC, lonC); //last click
+          var distanceMeters = startCoordinate.distanceTo(endCoordinate);
+          var distanceyards = (distanceMeters * 1.09361).toFixed(0);
+            document.getElementById("distanceFromHole").textContent = distanceyards;
+            console.log(distanceyards);
+      }
+
+      function getDistanceFromGreen(holesData, latC, lonC) {
+        var course = holesData["edgewood"]; //hard coded edgewood here
+        var courseGreen = course[HN]["green"]; //grabs from global
+        var startCoordinate = L.latLng(latC, lonC);
+        var endCoordinate = L.latLng(courseGreen.lat, courseGreen.lon);
+          var distanceToHoleMeters = startCoordinate.distanceTo(endCoordinate);
+          var distanceToHoleYards = (distanceToHoleMeters * 1.09361).toFixed(0);
+            document.getElementById("distanceToHole").textContent = distanceToHoleYards;
+            console.log(distanceToHoleYards);
       }
