@@ -60,6 +60,8 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
                 // Use lat and lon as needed
                 L.marker([lat, lon], {icon: dot}).addTo(map);
                 map.setView([lat, lon], 19); //pulls map to current location
+                getDistanceFromTee(holesData, lat, lon)
+                getDistanceFromGreen(holesData, lat, lon)
               },
             function(error) {
               console.error("Error getting location:", error);
@@ -98,9 +100,9 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
             //     map.removeLayer(marker);
             // }
             
-            marker = L.marker([lat, lon], {icon: customIcon}).addTo(map);
-            getDistanceFromTee(holesData, lat, lon)
-            getDistanceFromGreen(holesData, lat, lon)
+            // marker = L.marker([lat, lon], {icon: customIcon}).addTo(map);
+            // getDistanceFromTee(holesData, lat, lon)
+            // getDistanceFromGreen(holesData, lat, lon)
           });
 
           // tee = L.marker([holesData["edgewood"][HN].lat, holesData["edgewood"][HN].lon], {icon: holemarker}).addTo(map);
