@@ -6,6 +6,7 @@ from app.models.backend import SessionLocal, engine #importing the database conn
 import app.models.connection as models
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from app.models.statsEngine import StatsEngine
 import os
 
@@ -22,6 +23,11 @@ app.add_middleware(
 # Get the directory where this file is located
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "html")), name="static")
+
+# Serve index.html at root
+@app.get("/")
+def read_index():
+    return FileResponse(os.path.join(BASE_DIR, "html", "index.html"))
 
 class RoundBase(BaseModel):
     f_name: str
