@@ -53,26 +53,6 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
             },
           ).addTo(map);
 
-          var lat1 = 46.928529479821115;
-          var lon1 = -96.76733018050447
-          var lat2 = 46.92860015593717;
-          var lon2 = -96.7704112423103;
-
-          // Add markers
-          L.marker([lat1, lon1]).addTo(map).bindPopup('Point 1').openPopup();
-          L.marker([lat2, lon2]).addTo(map).bindPopup('Point 2');
-
-          // Calculate a control point for the curve (midpoint with offset for curve)
-          var latMid = (lat1 + lat2) / 2 + 0.001; // Offset latitude for curve
-          var lonMid = (lon1 + lon2) / 2;
-
-          // Draw a quadratic curve between the points
-          var path = [
-            'M', [lat1, lon1],
-            'Q', [latMid, lonMid], [lat2, lon2]
-          ];
-          L.curve(path, {color: 'blue', weight: 3}).addTo(map);
-
           navigator.geolocation.watchPosition(
             function(position) {
               const lat = position.coords.latitude;
