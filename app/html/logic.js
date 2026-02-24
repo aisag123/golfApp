@@ -2,7 +2,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       let map;
       let holesData;
       let marker; //var for current location marker
-      // let tee; //var for tee marker
+      let dot;
       let green; //var for green marker
 
       let HN = "hole1"; //global hole number variable to be used in distance funcstions
@@ -58,7 +58,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
               const lat = position.coords.latitude;
               const lon = position.coords.longitude;
                 // Use lat and lon as needed
-                L.marker([lat, lon]).addTo(map);
+                L.marker([lat, lon], {icon: dot}).addTo(map);
                 // map.setView([lat, lon], 19); //pulls map to current location
               },
             function(error) {
@@ -75,12 +75,12 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
             popupAnchor: [1, -40], 
           });
 
-          // holemarker = L.icon({
-          //   iconUrl: "images/tee.png", // Replace with the path to your hole marker image
-          //   iconSize: [40, 50],      // size of the icon
-          //   iconAnchor: [20, 50],    // bottom center of the icon
-          //   popupAnchor: [0, -50],   // popup above the marker
-          // });
+          const dot = L.icon({
+            iconUrl: "/static/images/dot.png", // Replace with the path to your hole marker image
+            iconSize: [40, 40],      // size of the icon
+            iconAnchor: [20, 40],    // bottom center of the icon
+            popupAnchor: [0, -50],   // popup above the marker
+          });
 
           flag = L.icon({
             iconUrl: "images/flag.png",
