@@ -58,7 +58,10 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
               const lat = position.coords.latitude;
               const lon = position.coords.longitude;
                 // Use lat and lon as needed
-                L.marker([lat, lon], {icon: dot}).addTo(map);
+                if (dot) {
+                  map.removeLayer(dot);
+                }
+                dot = L.marker([lat, lon], {icon: dot}).addTo(map);
                 map.setView([lat, lon], 19); //pulls map to current location
                 getDistanceFromTee(holesData, lat, lon)
                 getDistanceFromGreen(holesData, lat, lon)
@@ -81,7 +84,6 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
             iconUrl: "/static/images/dot.png", // Replace with the path to your hole marker image
             iconSize: [40, 40],      // size of the icon
             iconAnchor: [20, 40],    // bottom center of the icon
-            popupAnchor: [0, -50],   // popup above the marker
           });
 
           flag = L.icon({
