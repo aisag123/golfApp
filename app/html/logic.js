@@ -4,10 +4,13 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       let marker; //var for current location marker
       // let tee; //var for tee marker
       let green; //var for green marker
+      // ip = "localhost"
       ip = "192.168.4.185"
-      let HN = "hole1"; //global hole number variable to be used in distance functions
+      let HN = "hole1"; //global hole number variable to be used in distance funcstions
       // let holemarker; // declare globally so it can be accessed in multiple functions
       let flag; // declare globally so it can be accessed in multiple functions
+
+      var shots = [];
 
       async function initMap() {
         // Fetch known holes
@@ -54,8 +57,8 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
           const customIcon = L.icon({
             iconUrl: 'images/map-marker-circle-32.png',
             iconSize: [40, 40],
-            iconAnchor: [20, 40],    // point of the icon which corresponds to marker's location
-            popupAnchor: [1, -40],   // point from which the popup should open relative to the iconAnchor
+            iconAnchor: [20, 40], 
+            popupAnchor: [1, -40], 
         });
 
           // holemarker = L.icon({
@@ -166,4 +169,15 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
           var distanceToHoleYards = (distanceToHoleMeters * 1.09361).toFixed(0);
             document.getElementById("distanceToHole").textContent = distanceToHoleYards;
             console.log(distanceToHoleYards);
+      }
+
+      function storeShotData(distance, club, hole) {
+        // Find the number of shots already taken for this hole
+        const shotNum = shots.filter(s => s.hole === hole).length + 1;
+        shots.push({
+          hole,
+          shotNum,
+          distance,
+          club
+        });
       }

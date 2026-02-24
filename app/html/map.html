@@ -42,6 +42,13 @@
         color: white;
         border-radius: 10px;
       }
+      #add-shot {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+      }
     </style>
   </head>
   <body>
@@ -54,6 +61,8 @@
         <p>Distance From Tee <span id="distanceFromHole">--</span> yards</p>
       </div>
     </div>
+
+    <div class="btn-dark" id="add-shot"><button>add shot</button></div>
     <!-- Hole selector button -->
     <div class="btn-group">
       <button class="btn btn-secondary btn-lg" type="button">
