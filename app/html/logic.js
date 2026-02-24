@@ -4,8 +4,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       let marker; //var for current location marker
       // let tee; //var for tee marker
       let green; //var for green marker
-      // ip = "localhost"
-      ip = "192.168.4.185"
+      
       let HN = "hole1"; //global hole number variable to be used in distance funcstions
       // let holemarker; // declare globally so it can be accessed in multiple functions
       let flag; // declare globally so it can be accessed in multiple functions
@@ -14,7 +13,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
 
       async function initMap() {
         // Fetch known holes
-        const response = await fetch("http://" + ip + ":8000/known-holes");
+        const response = await fetch("https://golfapp-fv7m.onrender.com/known-holes");
         holesData = await response.json();
         // const holeLocation = holesData["edgewood"]; //hard code edgewood for now, will need to be dynamic later
 

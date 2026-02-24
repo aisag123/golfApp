@@ -60,7 +60,7 @@
       async function loadStats() {
         try {
           const response = await fetch(
-            "http://192.168.4.185:8000/overall-stats",
+            "https://golfapp-fv7m.onrender.com/overall-stats",
           );
           if (response.ok) {
             const stats = await response.json();
