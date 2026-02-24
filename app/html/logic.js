@@ -2,7 +2,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       let map;
       let holesData;
       let marker; //var for current location marker
-      let dot;
+      let userLocation; //var for user location
       let green; //var for green marker
 
       let HN = "hole1"; //global hole number variable to be used in distance funcstions
@@ -58,11 +58,11 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
               const lat = position.coords.latitude;
               const lon = position.coords.longitude;
                 // Use lat and lon as needed
-                if (dot) {
-                  map.removeLayer(dot);
+                if (userLocation) {
+                  map.removeLayer(userLocation);
                 }
-                dot = L.marker([lat, lon], {icon: dot}).addTo(map);
-                map.setView([lat, lon], 19); //pulls map to current location
+                userLocation = L.marker([lat, lon], {icon: dot}).addTo(map);
+                // map.setView([lat, lon], 19); //pulls map to current location
                 getDistanceFromTee(holesData, lat, lon)
                 getDistanceFromGreen(holesData, lat, lon)
               },
@@ -82,8 +82,8 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
 
           const dot = L.icon({
             iconUrl: "/static/images/dot.png", // Replace with the path to your hole marker image
-            iconSize: [40, 40],      // size of the icon
-            iconAnchor: [20, 40],    // bottom center of the icon
+            iconSize: [30, 30],      // size of the icon
+            iconAnchor: [15, 15],    // bottom center of the icon
           });
 
           flag = L.icon({
