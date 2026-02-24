@@ -4,7 +4,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       let marker; //var for current location marker
       // let tee; //var for tee marker
       let green; //var for green marker
-      
+
       let HN = "hole1"; //global hole number variable to be used in distance funcstions
       // let holemarker; // declare globally so it can be accessed in multiple functions
       let flag; // declare globally so it can be accessed in multiple functions
@@ -53,12 +53,27 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
             },
           ).addTo(map);
 
+          navigator.geolocation.watchPosition(
+            function(position) {
+              const lat = position.coords.latitude;
+              const lon = position.coords.longitude;
+                // Use lat and lon as needed
+                L.marker([lat, lon], {icon: customIcon}).addTo(map);
+                // map.setView([lat, lon], 19);
+              },
+            function(error) {
+              console.error("Error getting location:", error);
+            }
+          );
+
+
+
           const customIcon = L.icon({
             iconUrl: 'images/map-marker-circle-32.png',
             iconSize: [40, 40],
             iconAnchor: [20, 40], 
             popupAnchor: [1, -40], 
-        });
+          });
 
           // holemarker = L.icon({
           //   iconUrl: "images/tee.png", // Replace with the path to your hole marker image
