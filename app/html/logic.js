@@ -59,7 +59,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
               const lon = position.coords.longitude;
                 // Use lat and lon as needed
                 L.marker([lat, lon], {icon: dot}).addTo(map);
-                // map.setView([lat, lon], 19); //pulls map to current location
+                map.setView([lat, lon], 19); //pulls map to current location
               },
             function(error) {
               console.error("Error getting location:", error);
