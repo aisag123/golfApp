@@ -26,12 +26,30 @@
         width: 100%;
         background-color: #504f4f;
       }
-      .btn-group {
+      .hole-buttons {
         position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
+        top: 60px;
+        left: 10px;
         z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 70vh;
+        overflow-y: auto;
+      }
+      .hole-btn {
+        background: #222;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 16px;
+        margin: 0;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+      .hole-btn:hover {
+        background: #444;
       }
       #distances {
         position: absolute;
@@ -46,7 +64,6 @@
         #distances {
           margin-top: 10px;
           right: 50%;
-          left: 50%;
           transform: translateX(50%);
         }
       }
@@ -72,119 +89,16 @@
 
     <div class="btn-dark" id="add-shot"><button>add shot</button></div>
     <!-- Hole selector button -->
-    <div class="btn-group">
-      <button class="btn btn-secondary btn-lg" type="button">
-        Select Hole
-      </button>
-      <button
-        type="button"
-        class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        <span class="visually-hidden">Toggle Dropdown</span>
-      </button>
-      <ul class="dropdown-menu">
-        <li>
-          <a
-            class="dropdown-item"
-            href="#"
-            onclick="
-              moveToHole('hole1');
-              return false;
-            "
-            >Hole 1</a
-          >
-        </li>
-        <li>
-          <a
-            class="dropdown-item"
-            href="#"
-            onclick="
-              moveToHole('hole2');
-              return false;
-            "
-            >Hole 2</a
-          >
-        </li>
-        <li>
-          <a
-            class="dropdown-item"
-            href="#"
-            onclick="
-              moveToHole('hole3');
-              return false;
-            "
-            >Hole 3</a
-          >
-        </li>
-        <li>
-          <a
-            class="dropdown-item"
-            href="#"
-            onclick="
-              moveToHole('hole4');
-              return false;
-            "
-            >Hole 4</a
-          >
-        </li>
-        <li>
-          <a
-            class="dropdown-item"
-            href="#"
-            onclick="
-              moveToHole('hole5');
-              return false;
-            "
-            >Hole 5</a
-          >
-        </li>
-        <li>
-          <a
-            class="dropdown-item"
-            href="#"
-            onclick="
-              moveToHole('hole6');
-              return false;
-            "
-            >Hole 6</a
-          >
-        </li>
-        <li>
-          <a
-            class="dropdown-item"
-            href="#"
-            onclick="
-              moveToHole('hole7');
-              return false;
-            "
-            >Hole 7</a
-          >
-        </li>
-        <li>
-          <a
-            class="dropdown-item"
-            href="#"
-            onclick="
-              moveToHole('hole8');
-              return false;
-            "
-            >Hole 8</a
-          >
-        </li>
-        <li>
-          <a
-            class="dropdown-item"
-            href="#"
-            onclick="
-              moveToHole('hole9');
-              return false;
-            "
-            >Hole 9</a
-          >
-        </li>
-      </ul>
+    <div class="hole-buttons">
+      <button class="hole-btn" onclick="moveToHole('hole1')">Hole 1</button>
+      <button class="hole-btn" onclick="moveToHole('hole2')">Hole 2</button>
+      <button class="hole-btn" onclick="moveToHole('hole3')">Hole 3</button>
+      <button class="hole-btn" onclick="moveToHole('hole4')">Hole 4</button>
+      <button class="hole-btn" onclick="moveToHole('hole5')">Hole 5</button>
+      <button class="hole-btn" onclick="moveToHole('hole6')">Hole 6</button>
+      <button class="hole-btn" onclick="moveToHole('hole7')">Hole 7</button>
+      <button class="hole-btn" onclick="moveToHole('hole8')">Hole 8</button>
+      <button class="hole-btn" onclick="moveToHole('hole9')">Hole 9</button>
     </div>
     <script src="logic.js?v=2"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
