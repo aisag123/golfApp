@@ -28,7 +28,7 @@
       }
       .hole-buttons {
         position: absolute;
-        top: 60px;
+        top: 185px;
         left: 10px;
         z-index: 1000;
         display: flex;
@@ -37,24 +37,10 @@
         max-height: 70vh;
         overflow-y: auto;
       }
-      .hole-btn {
-        background: #222;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 16px;
-        margin: 0;
-        font-size: 16px;
-        cursor: pointer;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      }
-      .hole-btn:hover {
-        background: #444;
-      }
       #distances {
         position: absolute;
         top: 10px;
-        right: 50px;
+        right: 20px;
         z-index: 1000;
         background-color: rgb(108, 108, 108);
         color: white;
@@ -74,6 +60,14 @@
         transform: translateX(-50%);
         z-index: 1000;
       }
+      .btn {
+        background-color: #222;
+        color: #fff;
+      }
+      .btn:hover {
+        background-color: #0b5e30;
+        color: #fff;
+      }
     </style>
   </head>
   <body>
@@ -87,18 +81,20 @@
       </div>
     </div>
 
-    <div class="btn-dark" id="add-shot"><button>add shot</button></div>
+    <div class="btn-dark" id="add-shot">
+      <button class="btn">add shot</button>
+    </div>
     <!-- Hole selector button -->
     <div class="hole-buttons">
-      <button class="hole-btn" onclick="moveToHole('hole1')">Hole 1</button>
-      <button class="hole-btn" onclick="moveToHole('hole2')">Hole 2</button>
-      <button class="hole-btn" onclick="moveToHole('hole3')">Hole 3</button>
-      <button class="hole-btn" onclick="moveToHole('hole4')">Hole 4</button>
-      <button class="hole-btn" onclick="moveToHole('hole5')">Hole 5</button>
-      <button class="hole-btn" onclick="moveToHole('hole6')">Hole 6</button>
-      <button class="hole-btn" onclick="moveToHole('hole7')">Hole 7</button>
-      <button class="hole-btn" onclick="moveToHole('hole8')">Hole 8</button>
-      <button class="hole-btn" onclick="moveToHole('hole9')">Hole 9</button>
+      <button class="btn" onclick="moveToHole('hole1')">1</button>
+      <button class="btn" onclick="moveToHole('hole2')">2</button>
+      <button class="btn" onclick="moveToHole('hole3')">3</button>
+      <button class="btn" onclick="moveToHole('hole4')">4</button>
+      <button class="btn" onclick="moveToHole('hole5')">5</button>
+      <button class="btn" onclick="moveToHole('hole6')">6</button>
+      <button class="btn" onclick="moveToHole('hole7')">7</button>
+      <button class="btn" onclick="moveToHole('hole8')">8</button>
+      <button class="btn" onclick="moveToHole('hole9')">9</button>
     </div>
     <script src="logic.js?v=2"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
