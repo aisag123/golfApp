@@ -17,13 +17,13 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
         holesData = await response.json();
         // const holeLocation = holesData["edgewood"]; //hard code edgewood for now, will need to be dynamic later
 
-        const searchLat = localStorage.getItem('courseLat');
-        const searchLon = localStorage.getItem('courseLon');
+        const searchLat = localStorage.getItem('courseLat'); //grab the stored location of the selected course
+        const searchLon = localStorage.getItem('courseLon'); //grab the stored location of the selected course
 
         const lat = searchLat ? parseFloat(searchLat) : 46.92346068794036;
         const lon = searchLon ? parseFloat(searchLon) : -96.78736246872069;
 
-        map = L.map("map").setView([lat, lon], 19);
+        map = L.map("map", {zoomControl: false}, {maxZoom: 23}).setView([lat, lon], 19);
 
         // Initialize tiles
         try {
