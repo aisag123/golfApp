@@ -9,6 +9,8 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       // let holemarker; // declare globally so it can be accessed in multiple functions
       let flag; // declare globally so it can be accessed in multiple functions
 
+      let watchPositionLat;
+      let watchPositionLon;
       var shots = [];
 
       async function initMap() {
@@ -57,11 +59,13 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
             function(position) {
               const lat = position.coords.latitude;
               const lon = position.coords.longitude;
+              watchPositionLat = lat;
+              watchPositionLon = lon;
                 // Use lat and lon as needed
                 if (userLocation) {
                   map.removeLayer(userLocation);
                 }
-                userLocation = L.marker([lat, lon], {icon: dot}).addTo(map);
+                userLocation = L.marker([watchPositionLat, watchPositionLon], {icon: dot}).addTo(map);
                 // map.setView([lat, lon], 19); //pulls map to current location
                 getDistanceFromTee(holesData, lat, lon)
                 getDistanceFromGreen(holesData, lat, lon)
@@ -70,9 +74,6 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
               console.error("Error getting location:", error);
             }
           );
-
-
-
           const customIcon = L.icon({
             iconUrl: 'images/map-marker-circle-32.png',
             iconSize: [40, 40],
@@ -194,7 +195,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
           return distanceToHoleYards;
       }
 
-      function getDistanceFromLastShot(latS, lonS, lat, lon) { //lat lon is the current position
+      function getDistanceFromLastShot(latS, lonS, lat, lon) {
         var startCoordinate = L.latLng(latS, lonS);
         var endCoordinate = L.latLng(lat, lon);
           var distanceToLastShotMeters = startCoordinate.distanceTo(endCoordinate);
@@ -202,49 +203,29 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
         return distanceToLastShotYards;
       }
 
-      // function startShot(club, distance, hole) { //pass user location for start shot
-      //   navigator.geolocation.getCurrentPosition(function(position) {
-      //     const lat = position.coords.latitude;
-      //     const lon = position.coords.longitude;
-      //     shot = L.marker([lat, lon]).addTo(map); //use default marker for now, can change to custom icon later
-      //   });
-      //   const shotNum = shots.filter(s => s.hole === hole).length + 1;
-      //   shots.push({
-      //     hole,
-      //     shotNum,
-      //     distance,
-      //     club
-      //   });
-      //   console.log(shots);
-      // }
-
       function addShot(club, hole) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          let lat = position.coords.latitude;
-          let lon = position.coords.longitude;
+          L.marker([watchPositionLat, watchPositionLon]).addTo(map);
           let distance;
           let latS, lonS;
-          // Add marker
-          L.marker([lat, lon]).addTo(map);
           const shotNum = shots.filter(s => s.hole === hole).length + 1;
           
           if (shotNum <= 1) {
-            distance = getDistanceFromTee(holesData, lat, lon);
+            distance = getDistanceFromTee(holesData, watchPositionLat, watchPositionLon);
           } else {
             const lastShot = shots[shots.length - 1];
-            latS = lastShot.lat;
-            lonS = lastShot.lon;
-            distance = getDistanceFromLastShot(latS, lonS, lat, lon);
+            latS = lastShot.watchPositionLat;
+            lonS = lastShot.watchPositionLon;
+            distance = getDistanceFromLastShot(latS, lonS, watchPositionLat, watchPositionLon);
           }
           shots.push({
             hole,
             shotNum,
             distance,
             club,
-            lat,
-            lon
+            watchPositionLat,
+            watchPositionLon
           });
-        });
+          console.log(shots);
       }
 
       function completeHole(score, putts) {
