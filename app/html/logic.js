@@ -106,9 +106,6 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
             // getDistanceFromGreen(holesData, lat, lon)
           });
 
-          // tee = L.marker([holesData["edgewood"][HN].lat, holesData["edgewood"][HN].lon], {icon: holemarker}).addTo(map);
-          // green = L.marker([holesData["edgewood"][HN]["green"].lat, holesData["edgewood"][HN]["green"].lon], {icon: flag}).addTo(map);
-
         } catch (error) {
           console.error("Error creating session:", error);
           // Fallback to basic Google tiles
@@ -168,11 +165,6 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       }
 
       function getLatLon(lat, lon) { //start round button stores local starting points
-        // course = courseData["courses"][0];
-
-        // lat = course["location"]["latitude"];
-        // lon = course["location"]["longitude"];
-
         localStorage.setItem('courseLat', lat) //store local use when map is made
         localStorage.setItem('courseLon', lon) //store local use when map is made
         window.location.href = 'map.html';
@@ -198,6 +190,29 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
           var distanceToHoleYards = (distanceToHoleMeters * 1.09361).toFixed(0);
             document.getElementById("distanceToHole").textContent = distanceToHoleYards;
             console.log(distanceToHoleYards);
+      }
+
+      function startShot(club, distance, hole) { //pass user location for start shot
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          shot = L.marker([lat, lon], {icon: customIcon}).addTo(map);
+        });
+        const shotNum = shots.filter(s => s.hole === hole).length + 1;
+        shots.push({
+          hole,
+          shotNum,
+          distance,
+          club
+        });
+      }
+
+      function addShot(lat, lon, club) {
+
+      }
+
+      function completeHole(score, putts) {
+
       }
 
       function storeShotData(distance, club, hole) {
