@@ -196,7 +196,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
         navigator.geolocation.getCurrentPosition(function(position) {
           const lat = position.coords.latitude;
           const lon = position.coords.longitude;
-          shot = L.marker([lat, lon], {icon: customIcon}).addTo(map);
+          shot = L.marker([lat, lon]).addTo(map); //use default marker for now, can change to custom icon later
         });
         const shotNum = shots.filter(s => s.hole === hole).length + 1;
         shots.push({
@@ -205,10 +205,23 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
           distance,
           club
         });
+        console.log(shots);
       }
 
       function addShot(lat, lon, club) {
-
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          shot = L.marker([lat, lon]).addTo(map); //use default marker for now, can change to custom icon later
+        });
+        const shotNum = shots.filter(s => s.hole === hole).length + 1;
+        shots.push({
+          hole,
+          shotNum,
+          distance,
+          club
+        });
+        console.log(shots);
       }
 
       function completeHole(score, putts) {
