@@ -16,26 +16,33 @@
       width: 100%;
       height: 100%;
     }
-    /* .btn {
-      position: absolute;
-      width: 50%;
-      left: 50%;
-    }
-    .title {
-      position: absolute;
-      left: 40%;
-    } */
   </style>
   <body>
-    <div class="row-4">
-      <h1>START ROUND!</h1>
-      <div class="col-md-4">
-        <div class="btn">
+    <div class="container vh-100 d-flex flex-column justify-content-center">
+      <div class="row">
+        <h1 class="text-center">Search Courses</h1>
+        <div class="row text-center mt-3">
+          <div class="container-fluid">
+            <form class="d-flex" role="search" id="courseSearch">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+            </form>
+          </div>
+        </div>
+        <div class="row text-center mt-3">
           <button
-            class="btn btn-dark"
-            onclick="searchCourse('Edgewood golf course')"
+            class="btn btn-dark btn-lg"
+            onclick="
+              searchCourse(
+                document.getElementById('courseSearch').children[0].value,
+              )
+            "
           >
-            Find edgewood
+            Search
           </button>
         </div>
       </div>
