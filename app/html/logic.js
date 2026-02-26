@@ -179,6 +179,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
           var distanceyards = (distanceMeters * 1.09361).toFixed(0);
             document.getElementById("distanceFromHole").textContent = distanceyards;
             console.log(distanceyards);
+          return distanceyards;
       }
 
       function getDistanceFromGreen(holesData, latC, lonC) {
@@ -190,38 +191,60 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
           var distanceToHoleYards = (distanceToHoleMeters * 1.09361).toFixed(0);
             document.getElementById("distanceToHole").textContent = distanceToHoleYards;
             console.log(distanceToHoleYards);
+          return distanceToHoleYards;
       }
 
-      function startShot(club, distance, hole) { //pass user location for start shot
-        navigator.geolocation.getCurrentPosition(function(position) {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-          shot = L.marker([lat, lon]).addTo(map); //use default marker for now, can change to custom icon later
-        });
-        const shotNum = shots.filter(s => s.hole === hole).length + 1;
-        shots.push({
-          hole,
-          shotNum,
-          distance,
-          club
-        });
-        console.log(shots);
+      function getDistanceFromLastShot(latS, lonS, lat, lon) { //lat lon is the current position
+        var startCoordinate = L.latLng(latS, lonS);
+        var endCoordinate = L.latLng(lat, lon);
+          var distanceToLastShotMeters = startCoordinate.distanceTo(endCoordinate);
+          var distanceToLastShotYards = (distanceToLastShotMeters * 1.09361).toFixed(0);
+        return distanceToLastShotYards;
       }
 
-      function addShot(lat, lon, club) {
+      // function startShot(club, distance, hole) { //pass user location for start shot
+      //   navigator.geolocation.getCurrentPosition(function(position) {
+      //     const lat = position.coords.latitude;
+      //     const lon = position.coords.longitude;
+      //     shot = L.marker([lat, lon]).addTo(map); //use default marker for now, can change to custom icon later
+      //   });
+      //   const shotNum = shots.filter(s => s.hole === hole).length + 1;
+      //   shots.push({
+      //     hole,
+      //     shotNum,
+      //     distance,
+      //     club
+      //   });
+      //   console.log(shots);
+      // }
+
+      function addShot(club, hole) {
         navigator.geolocation.getCurrentPosition(function(position) {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-          shot = L.marker([lat, lon]).addTo(map); //use default marker for now, can change to custom icon later
+          let lat = position.coords.latitude;
+          let lon = position.coords.longitude;
+          let distance;
+          let latS, lonS;
+          // Add marker
+          L.marker([lat, lon]).addTo(map);
+          const shotNum = shots.filter(s => s.hole === hole).length + 1;
+          
+          if (shotNum <= 1) {
+            distance = getDistanceFromTee(holesData, lat, lon);
+          } else {
+            const lastShot = shots[shots.length - 1];
+            latS = lastShot.lat;
+            lonS = lastShot.lon;
+            distance = getDistanceFromLastShot(latS, lonS, lat, lon);
+          }
+          shots.push({
+            hole,
+            shotNum,
+            distance,
+            club,
+            lat,
+            lon
+          });
         });
-        const shotNum = shots.filter(s => s.hole === hole).length + 1;
-        shots.push({
-          hole,
-          shotNum,
-          distance,
-          club
-        });
-        console.log(shots);
       }
 
       function completeHole(score, putts) {
