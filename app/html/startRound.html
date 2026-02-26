@@ -16,6 +16,16 @@
       width: 100%;
       height: 100%;
     }
+    #searchResults {
+      max-height: 300px;
+      overflow-y: auto;
+      width: 600px;
+      margin: 0 auto;
+      background: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 8px;
+    }
   </style>
   <body>
     <div class="container vh-100 d-flex flex-column justify-content-center">
@@ -33,11 +43,12 @@
             </form>
           </div>
         </div>
+        <div id="searchResults" class="row"></div>
         <div class="row text-center mt-3">
           <button
             class="btn btn-dark btn-lg"
             onclick="
-              searchCourse(
+              test = searchCourse(
                 document.getElementById('courseSearch').children[0].value,
               )
             "

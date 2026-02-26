@@ -150,16 +150,28 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
         );
 
         const data = await response.json();
-        getLatLon(data);
+        // getLatLon(data);
         console.log(data);
+        const resultsDiv = document.getElementById('searchResults');
+        resultsDiv.innerHTML = '';
+        if (data.courses && data.courses.length > 0) {
+          data.courses.forEach(course => {
+            resultsDiv.innerHTML += `<div class="card mb-2"><div class="card-body">
+              <h5>${course.course_name}</h5>
+              <p>${course.location.address}</p>
+              <button class="btn btn-dark" onclick='getLatLon(${course.location.latitude}, ${course.location.longitude})'>Select Course</button>`;
+          });
+        } else {
+          resultsDiv.innerHTML = '<p>No courses found.</p>';
+        }
         return data;
       }
 
-      function getLatLon(courseData) { //start round button stores local starting points
-        course = courseData["courses"][0];
+      function getLatLon(lat, lon) { //start round button stores local starting points
+        // course = courseData["courses"][0];
 
-        lat = course["location"]["latitude"];
-        lon = course["location"]["longitude"];
+        // lat = course["location"]["latitude"];
+        // lon = course["location"]["longitude"];
 
         localStorage.setItem('courseLat', lat) //store local use when map is made
         localStorage.setItem('courseLon', lon) //store local use when map is made
