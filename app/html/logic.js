@@ -5,7 +5,8 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       let userLocation; //var for user location
       let green; //var for green marker
       let customIcon;
-      let HN = "hole1"; //global hole number variable to be used in distance funcstions
+      let HN = "hole1";
+      let hn = 0;
       // let holemarker; // declare globally so it can be accessed in multiple functions
       let flag; // declare globally so it can be accessed in multiple functions
 
@@ -13,14 +14,21 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       let watchPositionLon;
       var shots = [];
 
+      let searchCourseName;
+      let searchCourseData;
+
       async function initMap() {
         // Fetch known holes
         const response = await fetch("https://golfapp-fv7m.onrender.com/known-holes");
         holesData = await response.json();
+        console.log(holesData);
         // const holeLocation = holesData["edgewood"]; //hard code edgewood for now, will need to be dynamic later
 
-        const searchLat = localStorage.getItem('courseLat'); //grab the stored location of the selected course
-        const searchLon = localStorage.getItem('courseLon'); //grab the stored location of the selected course
+        const searchLat = localStorage.getItem('courseLat'); 
+        const searchLon = localStorage.getItem('courseLon'); 
+        searchCourseName = localStorage.getItem('courseName'); 
+        searchCourseData = JSON.parse(localStorage.getItem('courseData'));
+        console.log(searchCourseData);
 
         const lat = searchLat ? parseFloat(searchLat) : 46.92346068794036;
         const lon = searchLon ? parseFloat(searchLon) : -96.78736246872069;
@@ -107,6 +115,8 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
             // getDistanceFromGreen(holesData, lat, lon)
           });
 
+          moveToHole(); //call moveToHole after map and icons are initialized
+
         } catch (error) {
           console.error("Error creating session:", error);
           // Fallback to basic Google tiles
@@ -117,12 +127,31 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
         }
       }
 
-      function moveToHole(holeNumber) {
+      function nextHole() {
+        hn += 1;
+        moveToHole();
+      }
+
+      function lastHole() {
+        hn -= 1;
+        moveToHole();
+      }
+
+      function moveToHole() {
+        const test = searchCourseData.tees.male[1]; //manually select tee
+        const h = test.holes[hn].yardage;
+        const p = test.holes[hn].par;
+        document.getElementById("holeYards").textContent = h;
+        document.getElementById("holePar").textContent = p;
+        document.getElementById("holeNumber").textContent = hn + 1;
+
+        
         if (!holesData || !map) return;
-        HN = holeNumber;
-        console.log(HN);
-        var hole = holesData["edgewood"][holeNumber];
-        if (hole) {
+        // Use hn (current hole number) to access the correct hole
+        const hole5 = holesData["edgewood"][hn.toString()];
+        console.log('Current hole:', hn, hole5);
+        console.log(hole5);
+        if (hole5) {
           if (green) {
             map.removeLayer(green);
           }
@@ -153,7 +182,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
             resultsDiv.innerHTML += `<div class="card mb-2"><div class="card-body">
               <h5>${course.course_name}</h5>
               <p>${course.location.address}</p>
-              <button class="btn btn-dark" onclick='getLatLon(${course.location.latitude}, ${course.location.longitude})'>Select Course</button>`;
+              <button class="btn btn-dark" onclick='getLatLon(${course.location.latitude}, ${course.location.longitude}, "${course.course_name}", ${JSON.stringify(course)})'>Select Course</button>`;
           });
         } else {
           resultsDiv.innerHTML = '<p>No courses found.</p>';
@@ -161,9 +190,11 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
         return data;
       }
 
-      function getLatLon(lat, lon) { //start round button stores local starting points
+      function getLatLon(lat, lon, courseName, courseData) { //start round button stores local starting points
         localStorage.setItem('courseLat', lat) //store local use when map is made
         localStorage.setItem('courseLon', lon) //store local use when map is made
+        localStorage.setItem('courseName', courseName) //store local use when map is made
+        localStorage.setItem('courseData', JSON.stringify(courseData)) //store local use when map is made
         window.location.href = 'map.html';
       }
 

@@ -93,35 +93,13 @@
 
     <div class="container-top">
       <div class="content">
-        <h1 class="hole-name">Hole <span id="holeNumber">1</span></h1>
+        <h1 class="hole-name">Hole <span id="holeNumber">--</span></h1>
         <h1 class="hole-yards">
           <span id="holeYards">--</span> yards | Par
           <span id="holePar">--</span>
         </h1>
-        <div
-          class="btn btn-dark"
-          onclick="
-            moveToHole(
-              'hole' +
-                (parseInt(document.getElementById('holeNumber').textContent) -
-                  1),
-            )
-          "
-        >
-          Last hole
-        </div>
-        <div
-          class="btn btn-dark"
-          onclick="
-            moveToHole(
-              'hole' +
-                (parseInt(document.getElementById('holeNumber').textContent) +
-                  1),
-            )
-          "
-        >
-          Next hole
-        </div>
+        <div class="btn btn-dark" onclick="lastHole()">Last hole</div>
+        <div class="btn btn-dark" onclick="nextHole()">Next hole</div>
       </div>
     </div>
 
