@@ -148,14 +148,13 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
         
         if (!holesData || !map) return;
         // Use hn (current hole number) to access the correct hole
-        const hole5 = holesData["edgewood"][hn.toString()];
-        console.log('Current hole:', hn, hole5);
-        console.log(hole5);
-        if (hole5) {
-          if (green) {
-            map.removeLayer(green);
-          }
-          green = L.marker([hole["green"].lat, hole["green"].lon], {icon: flag}).addTo(map);
+        const hole = holesData["edgewood"][hn];
+        console.log('Current hole:', hn, hole);
+        if (hole) {
+          // if (green) {
+          //   map.removeLayer(green);
+          // }
+          // green = L.marker([hole["green"].lat, hole["green"].lon], {icon: flag}).addTo(map);
           map.setView([hole.lat, hole.lon], 19);
         }
       }
