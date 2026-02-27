@@ -151,10 +151,6 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
         const hole = holesData["edgewood"][hn];
         console.log('Current hole:', hn, hole);
         if (hole) {
-          // if (green) {
-          //   map.removeLayer(green);
-          // }
-          // green = L.marker([hole["green"].lat, hole["green"].lon], {icon: flag}).addTo(map);
           map.setView([hole.lat, hole.lon], 19);
         }
       }
