@@ -67,8 +67,8 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
                 }
                 userLocation = L.marker([watchPositionLat, watchPositionLon], {icon: dot}).addTo(map);
                 // map.setView([lat, lon], 19); //pulls map to current location
-                getDistanceFromTee(holesData, lat, lon)
-                getDistanceFromGreen(holesData, lat, lon)
+                // getDistanceFromTee(holesData, lat, lon)
+                // getDistanceFromGreen(holesData, lat, lon)
               },
             function(error) {
               console.error("Error getting location:", error);
@@ -123,10 +123,6 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
         console.log(HN);
         var hole = holesData["edgewood"][holeNumber];
         if (hole) {
-          // if (tee ) {
-          //   map.removeLayer(tee);
-          // }
-          // tee = L.marker([hole.lat, hole.lon], {icon: holemarker}).addTo(map);
           if (green) {
             map.removeLayer(green);
           }
@@ -178,7 +174,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
         var endCoordinate = L.latLng(latC, lonC); //last click
           var distanceMeters = startCoordinate.distanceTo(endCoordinate);
           var distanceyards = (distanceMeters * 1.09361).toFixed(0);
-            document.getElementById("distanceFromHole").textContent = distanceyards;
+            // document.getElementById("distanceFromHole").textContent = distanceyards;
             console.log(distanceyards);
           return distanceyards;
       }
@@ -190,7 +186,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
         var endCoordinate = L.latLng(courseGreen.lat, courseGreen.lon);
           var distanceToHoleMeters = startCoordinate.distanceTo(endCoordinate);
           var distanceToHoleYards = (distanceToHoleMeters * 1.09361).toFixed(0);
-            document.getElementById("distanceToHole").textContent = distanceToHoleYards;
+            // document.getElementById("distanceToHole").textContent = distanceToHoleYards;
             console.log(distanceToHoleYards);
           return distanceToHoleYards;
       }
