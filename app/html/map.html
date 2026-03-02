@@ -26,13 +26,6 @@
         width: 100%;
         background-color: #504f4f;
       }
-      #add-shot {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
-      }
       .container-top {
         position: absolute;
         top: 20px;
@@ -42,10 +35,8 @@
         width: 90vw;
         max-width: 450px;
         display: flex;
-        justify-content: center;
-        align-items: center;
       }
-      .content {
+      .content-top {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -53,30 +44,104 @@
         height: 60px;
         background-color: #222;
         border-radius: 15px;
-        justify-content: left;
       }
-      .content,
+      .content-top,
       .hole-name {
         font-size: 21px;
         color: #058d42;
         margin: 10px;
       }
-      .content,
+      .content-top,
       .hole-yards {
         font-size: 17px;
         color: #fff;
         margin: 5px;
       }
-      .content .btn {
+      .content-top .btn {
         border-color: #058d42;
         border-radius: 10px;
         border-width: 1.5px;
         margin-left: auto;
         margin-right: 10px;
       }
-      .content .btn:hover {
+      .content-top .btn:hover {
         background-color: #058d42;
         color: #fff;
+      }
+      .container-bottom {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        width: 90vw;
+        max-width: 450px;
+        display: flex;
+      }
+      .content-bottom {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 60px;
+        background-color: #222;
+        border-radius: 15px;
+        padding: 0 10px;
+      }
+      .content-bottom .add-shot-btn {
+        border-color: #058d42;
+        width: 110px;
+        border-radius: 10px;
+        border-width: 1.5px;
+        margin-right: 10px;
+      }
+      .content-bottom .add-shot-btn:hover {
+        background-color: #058d42;
+        color: #fff;
+      }
+      .add-putt-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        align-items: center;
+      }
+      .add-putt-container .putt-btn {
+        border-color: #058d42;
+        border-radius: 10px;
+        border-width: 1.5px;
+        width: 45px;
+        height: 32px;
+        line-height: 18px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .add-putt-container .putt-btn:hover {
+        background-color: #058d42;
+        color: #fff;
+      }
+      .add-putt-container .putt-label {
+        margin: 0;
+      }
+      .total-shots-container {
+        display: flex;
+        flex-direction: column;
+        column-gap: 0px;
+        border-width: 1.5px;
+        border-style: solid;
+        border-color: #058d42;
+        border-radius: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .total-shots-container p,
+      .total-shots-container h5 {
+        color: white;
+        text-align: center;
+        margin-bottom: -2px;
       }
     </style>
   </head>
@@ -92,7 +157,7 @@
     </div>
 
     <div class="container-top">
-      <div class="content">
+      <div class="content-top">
         <h1 class="hole-name">Hole <span id="holeNumber">--</span></h1>
         <h1 class="hole-yards">
           <span id="holeYards">--</span> yards | Par
@@ -103,20 +168,20 @@
       </div>
     </div>
 
-    <!-- <div class="btn-dark" id="add-shot">
-      <button class="btn" onclick="addShot('driver', HN)">add shot</button>
-    </div> -->
-    <!-- <div class="hole-buttons">
-      <button class="btn" onclick="moveToHole('hole1')">1</button>
-      <button class="btn" onclick="moveToHole('hole2')">2</button>
-      <button class="btn" onclick="moveToHole('hole3')">3</button>
-      <button class="btn" onclick="moveToHole('hole4')">4</button>
-      <button class="btn" onclick="moveToHole('hole5')">5</button>
-      <button class="btn" onclick="moveToHole('hole6')">6</button>
-      <button class="btn" onclick="moveToHole('hole7')">7</button>
-      <button class="btn" onclick="moveToHole('hole8')">8</button>
-      <button class="btn" onclick="moveToHole('hole9')">9</button>
-    </div> -->
+    <div class="container-bottom">
+      <div class="content-bottom">
+        <div class="btn btn-dark add-shot-btn">Add shot</div>
+        <div class="total-shots-container">
+          <h5><span id="total-shots">0</span></h5>
+          <p>Shots</p>
+        </div>
+        <div class="add-putt-container">
+          <div class="btn btn-dark putt-btn">-</div>
+          <p class="putt-label"><span id="putts">0</span> putts</p>
+          <div class="btn btn-dark putt-btn">+</div>
+        </div>
+      </div>
+    </div>
     <script src="logic.js?v=2"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
