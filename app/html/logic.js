@@ -1,4 +1,4 @@
-      let API_KEY;
+      const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
       let map;
       let holesData;
       let marker; //var for current location marker
@@ -16,19 +16,6 @@
 
       let searchCourseName;
       let searchCourseData;
-
-
-      async function getAPIkey() {
-        try {
-          const response = await fetch("https://golfapp-fv7m.onrender.com/api-Keys");
-          const data = await response.json();
-          API_KEY = data.mapAPI;
-          console.log(data);
-        } catch (error) {
-          console.error("Error fetching API key:", error);
-          return null;
-        }
-      }
 
       async function initMap() {
         // Fetch known holes
@@ -50,7 +37,6 @@
 
         // Initialize tiles
         try {
-          getAPIkey() //get api key from api then use it
           const tileResponse = await fetch(
             `https://tile.googleapis.com/v1/createSession?key=${API_KEY}`,
             {

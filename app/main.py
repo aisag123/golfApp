@@ -95,8 +95,8 @@ async def get_holes():
     holes = engine.postKnownHoles()
     return holes
 
-@app.get("/api-Keys")
-async def get_apiKeys():
-    engine = StatsEngine()
-    api = engine.getAPI()
-    return api
+# @app.get("/api-Keys")
+# async def get_apiKeys():
+#     engine = StatsEngine()
+#     api = engine.getAPI()
+#     return api
