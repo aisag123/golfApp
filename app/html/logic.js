@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
+      let API_KEY;
       let map;
       let holesData;
       let marker; //var for current location marker
@@ -16,6 +16,19 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
 
       let searchCourseName;
       let searchCourseData;
+
+
+      async function getAPIkey() {
+        try {
+          const response = await fetch("https://golfapp-fv7m.onrender.com/api-key");
+          const data = await response.json();
+          API_KEY = data.maoAPI;
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching API key:", error);
+          return null;
+        }
+      }
 
       async function initMap() {
         // Fetch known holes
@@ -37,6 +50,7 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
 
         // Initialize tiles
         try {
+          getAPIkey()
           const tileResponse = await fetch(
             `https://tile.googleapis.com/v1/createSession?key=${API_KEY}`,
             {
@@ -254,13 +268,13 @@ const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
 
       }
 
-      function storeShotData(distance, club, hole) {
-        // Find the number of shots already taken for this hole
-        const shotNum = shots.filter(s => s.hole === hole).length + 1;
-        shots.push({
-          hole,
-          shotNum,
-          distance,
-          club
-        });
-      }
+      // function storeShotData(distance, club, hole) {
+      //   // Find the number of shots already taken for this hole
+      //   const shotNum = shots.filter(s => s.hole === hole).length + 1;
+      //   shots.push({
+      //     hole,
+      //     shotNum,
+      //     distance,
+      //     club
+      //   });
+      // }

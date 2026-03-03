@@ -6,7 +6,7 @@ import requests
 import os
 from dotenv import load_dotenv
 
-load_dotenv()  # Load environment variables from .env file
+load_dotenv(dotenv_path="app/.env")  # Load environment variables from .env file
 
 
 class StatsEngine:
@@ -15,20 +15,20 @@ class StatsEngine:
         self.course = Course()
         self.player = Player()
 
-    def setupFinsihedRound(self):
-        self.course.setCourseInfo("Edgewood", "Fargo", 0, 0, 72, 18)
-        self.player.SetPlayerName("Aiden", "Sagaser")
-        self.player.SetHolesPlayed(18)
-        self.player.SetRoundScore(80)
+    # def setupFinsihedRound(self):
+    #     self.course.setCourseInfo("Edgewood", "Fargo", 0, 0, 72, 18)
+    #     self.player.SetPlayerName("Aiden", "Sagaser")
+    #     self.player.SetHolesPlayed(18)
+    #     self.player.SetRoundScore(80)
 
-    def calculateHandicap(self, courseRating, slope, average):
-        #call function to calculate average best 8 of 20
-        if (courseRating is None or slope is None):
-            print("Course rating and slope must be provided")
-            return None
-        handicap = (average - courseRating) * 113 / slope 
-        print("Calculated handicap: ", handicap)
-        return handicap
+    # def calculateHandicap(self, courseRating, slope, average):
+    #     #call function to calculate average best 8 of 20
+    #     if (courseRating is None or slope is None):
+    #         print("Course rating and slope must be provided")
+    #         return None
+    #     handicap = (average - courseRating) * 113 / slope 
+    #     print("Calculated handicap: ", handicap)
+    #     return handicap
     
     #this will grab from the database later
     def calculateAverageScores(self, scores: list[int]):
@@ -189,6 +189,15 @@ class StatsEngine:
         }
         # print("Edgewood Home5: " + courses["edgewood"])
         return courses
+    
+    def getAPI(self):
+        courseAPI = os.getenv("API_KEY")
+        mapAPI = os.getenv("API_KEY_MAPS")
+        api = {
+            "courseAPI": courseAPI,
+            "mapAPI": mapAPI
+        }
+        return api
 
 
     def getcourseInfo(self, course_name, tee):
@@ -239,18 +248,18 @@ class StatsEngine:
             return None
 
     # Entry point for testing
-if __name__ == "__main__":
-    engine = StatsEngine()
-    # engine.setupFinsihedRound()
-    # engine.calculateAverageScores([80, 85, 78, 90, 88, 76, 82, 79])
-    data = engine.getcourseInfo("Edgewood Golf Course", "white")
-    if data:
-        print(f"Course: {data['course_name']}")
-        print(f"Par: {data['par']}")
-        print(f"Slope: {data['slope']}")
-        print(f"Rating: {data['rating']}")
-        print(f"Address: {data['location']['address']}")
-    else:
-        print("No course data found")
+# if __name__ == "__main__":
+#     engine = StatsEngine()
+#     # engine.setupFinsihedRound()
+#     # engine.calculateAverageScores([80, 85, 78, 90, 88, 76, 82, 79])
+#     data = engine.getcourseInfo("Edgewood Golf Course", "white")
+#     if data:
+#         print(f"Course: {data['course_name']}")
+#         print(f"Par: {data['par']}")
+#         print(f"Slope: {data['slope']}")
+#         print(f"Rating: {data['rating']}")
+#         print(f"Address: {data['location']['address']}")
+#     else:
+#         print("No course data found")
 
 
