@@ -22,7 +22,7 @@
         try {
           const response = await fetch("https://golfapp-fv7m.onrender.com/api-key");
           const data = await response.json();
-          API_KEY = data.maoAPI;
+          API_KEY = data.mapAPI;
           console.log(data);
         } catch (error) {
           console.error("Error fetching API key:", error);
