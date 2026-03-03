@@ -20,7 +20,7 @@
 
       async function getAPIkey() {
         try {
-          const response = await fetch("https://golfapp-fv7m.onrender.com/api-key");
+          const response = await fetch("https://golfapp-fv7m.onrender.com/api-Keys");
           const data = await response.json();
           API_KEY = data.mapAPI;
           console.log(data);
@@ -50,7 +50,7 @@
 
         // Initialize tiles
         try {
-          getAPIkey()
+          getAPIkey() //get api key from api then use it
           const tileResponse = await fetch(
             `https://tile.googleapis.com/v1/createSession?key=${API_KEY}`,
             {
