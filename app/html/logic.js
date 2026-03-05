@@ -252,9 +252,9 @@
           console.log(shots);
       }
 
-      function incrimentPutt() {
+      function addPutt() {
         let putts;
-        if (putts === undefined || putts === null) {
+        if (putts > 0) {
           putts += 1;
         }
         shots.push({
@@ -263,7 +263,6 @@
           puttNum: putts,
         });
         console.log(shots);
-        return putts;
       }
 
       function decrimentPutt() {
