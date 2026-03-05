@@ -240,14 +240,34 @@
             distance = getDistanceFromLastShot(latS, lonS, watchPositionLat, watchPositionLon);
           }
           shots.push({
-            hole,
-            shotNum,
-            distance,
-            club,
-            watchPositionLat,
-            watchPositionLon
+            type: 'shot',
+            club: "7i",
+            hole: hn,
+            seq: 1,
+            puttNum: 1,
+            lat: watchPositionLat,
+            lon: watchPositionLon,
+            ts: Date.now()
           });
           console.log(shots);
+      }
+
+      function incrimentPutt() {
+        let putts;
+        if (putts === undefined || putts === null) {
+          putts += 1;
+        }
+        shots.push({
+          type: 'putt',
+          hole: hn,
+          puttNum: putts,
+        });
+        console.log(shots);
+        return putts;
+      }
+
+      function decrimentPutt() {
+        
       }
 
       function completeHole(score, putts) {
