@@ -167,13 +167,25 @@
           <p>Shots</p>
         </div>
         <div class="add-putt-container">
-          <div class="btn btn-dark putt-btn" onclick="//test">-</div>
+          <div
+            id="puttMinusBtn"
+            class="btn btn-dark putt-btn"
+            onclick="addPutt()"
+          >
+            -
+          </div>
           <p class="putt-label"><span id="putts">0</span> putts</p>
-          <div class="btn btn-dark putt-btn" onclick="//test">+</div>
+          <div
+            id="puttPlusBtn"
+            class="btn btn-dark putt-btn"
+            onclick="addPutt()"
+          >
+            +
+          </div>
         </div>
       </div>
     </div>
-    <script src="logic.js"></script>
+    <script src="logic.js?v=3"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
       initMap();

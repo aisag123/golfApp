@@ -253,9 +253,9 @@
       }
 
       function addPutt() {
-        let putts;
+        var putts = 0;
         if (putts > 0) {
-          putts += 1;
+          putts++;
         }
         shots.push({
           type: 'putt',
