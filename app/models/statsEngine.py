@@ -189,16 +189,6 @@ class StatsEngine:
         }
         # print("Edgewood Home5: " + courses["edgewood"])
         return courses
-    
-    # def getAPI(self):
-    #     courseAPI = os.getenv("API_KEY")
-    #     mapAPI = os.getenv("API_KEY_MAPS")
-    #     api = {
-    #         "courseAPI": courseAPI,
-    #         "mapAPI": mapAPI
-    #     }
-    #     return api
-
 
     def getcourseInfo(self, course_name, tee):
         api_key = os.getenv("API_KEY")
