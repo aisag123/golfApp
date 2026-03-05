@@ -225,45 +225,45 @@
         return distanceToLastShotYards;
       }
 
-      function addShot(club, hole) {
-          L.marker([watchPositionLat, watchPositionLon]).addTo(map);
-          let distance;
-          let latS, lonS;
-          const shotNum = shots.filter(s => s.hole === hole).length + 1;
+      // function addShot(club, hole) {
+      //     L.marker([watchPositionLat, watchPositionLon]).addTo(map);
+      //     let distance;
+      //     let latS, lonS;
+      //     const shotNum = shots.filter(s => s.hole === hole).length + 1;
           
-          if (shotNum <= 1) {
-            distance = getDistanceFromTee(holesData, watchPositionLat, watchPositionLon);
-          } else {
-            const lastShot = shots[shots.length - 1];
-            latS = lastShot.watchPositionLat;
-            lonS = lastShot.watchPositionLon;
-            distance = getDistanceFromLastShot(latS, lonS, watchPositionLat, watchPositionLon);
-          }
-          shots.push({
-            type: 'shot',
-            club: "7i",
-            hole: hn,
-            seq: 1,
-            puttNum: 1,
-            lat: watchPositionLat,
-            lon: watchPositionLon,
-            ts: Date.now()
-          });
-          console.log(shots);
-      }
+      //     if (shotNum <= 1) {
+      //       distance = getDistanceFromTee(holesData, watchPositionLat, watchPositionLon);
+      //     } else {
+      //       const lastShot = shots[shots.length - 1];
+      //       latS = lastShot.watchPositionLat;
+      //       lonS = lastShot.watchPositionLon;
+      //       distance = getDistanceFromLastShot(latS, lonS, watchPositionLat, watchPositionLon);
+      //     }
+      //     shots.push({
+      //       type: 'shot',
+      //       club: "7i",
+      //       hole: hn,
+      //       seq: 1,
+      //       puttNum: 1,
+      //       lat: watchPositionLat,
+      //       lon: watchPositionLon,
+      //       ts: Date.now()
+      //     });
+      //     console.log(shots);
+      // }
 
-      function addPutt() {
-        var putts = 0;
-        if (putts > 0) {
-          putts++;
-        }
-        shots.push({
-          type: 'putt',
-          hole: hn,
-          puttNum: putts,
-        });
-        console.log(shots);
-      }
+      // function addPutt() {
+      //   var putts = 0;
+      //   if (putts > 0) {
+      //     putts++;
+      //   }
+      //   shots.push({
+      //     type: 'putt',
+      //     hole: hn,
+      //     puttNum: putts,
+      //   });
+      //   console.log(shots);
+      // }
 
       function decrimentPutt() {
         
@@ -272,6 +272,8 @@
       function completeHole(score, putts) {
 
       }
+
+      
 
       // function storeShotData(distance, club, hole) {
       //   // Find the number of shots already taken for this hole
