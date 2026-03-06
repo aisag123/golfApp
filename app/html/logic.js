@@ -32,7 +32,7 @@
 
         const lat = parseFloat(searchLat);
         const lon = parseFloat(searchLon);
-        
+
         map = L.map("map", {zoomControl: false}, {maxZoom: 23}).setView([lat, lon], 19);
 
         // Initialize tiles
@@ -115,7 +115,7 @@
             // getDistanceFromGreen(holesData, lat, lon)
           });
 
-          moveToHole(); //call moveToHole after map and icons are initialized
+          // moveToHole(); //call moveToHole after map and icons are initialized
 
         } catch (error) {
           console.error("Error creating session:", error);
