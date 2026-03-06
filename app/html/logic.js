@@ -30,9 +30,9 @@
         searchCourseData = JSON.parse(localStorage.getItem('courseData'));
         console.log(searchCourseData);
 
-        const lat = searchLat ? parseFloat(searchLat) : 46.92346068794036;
-        const lon = searchLon ? parseFloat(searchLon) : -96.78736246872069;
-
+        const lat = parseFloat(searchLat);
+        const lon = parseFloat(searchLon);
+        
         map = L.map("map", {zoomControl: false}, {maxZoom: 23}).setView([lat, lon], 19);
 
         // Initialize tiles
