@@ -145,14 +145,14 @@
         document.getElementById("holePar").textContent = p;
         document.getElementById("holeNumber").textContent = hn + 1;
 
-        
-        if (!holesData || !map) return;
-        // Use hn (current hole number) to access the correct hole
-        const hole = holesData["edgewood"][hn];
-        console.log('Current hole:', hn, hole);
-        if (hole) {
-          map.setView([hole.lat, hole.lon], 19);
-        }
+        //need to fix this so it doesnt only use edgewood.
+        // if (!holesData || !map) return;
+        // // Use hn (current hole number) to access the correct hole
+        // const hole = holesData["edgewood"][hn];
+        // console.log('Current hole:', hn, hole);
+        // if (hole) {
+        //   map.setView([hole.lat, hole.lon], 19);
+        // }
       }
 
       async function searchCourse(courseName) { //used for start round button
