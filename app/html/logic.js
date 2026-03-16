@@ -27,6 +27,7 @@
         const searchLat = localStorage.getItem('courseLat'); 
         const searchLon = localStorage.getItem('courseLon'); 
         searchCourseName = localStorage.getItem('courseName'); 
+        console.log("stored course name: " + searchCourseName);
         searchCourseData = JSON.parse(localStorage.getItem('courseData'));
         console.log(searchCourseData);
 
@@ -144,6 +145,7 @@
         document.getElementById("holeYards").textContent = h;
         document.getElementById("holePar").textContent = p;
         document.getElementById("holeNumber").textContent = hn + 1;
+        updatePutts();
 
         //need to fix this so it doesnt only use edgewood.
         // if (!holesData || !map) return;
