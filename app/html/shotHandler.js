@@ -29,7 +29,13 @@ function addPutt() {
         type: 'putt',
         timestamp: new Date().toISOString()
     });
-    console.log(`Added putt to hole ${hn + 1}:`, currentRound);
+    console.log(`Added putt to hole ${hn + 1}:`);
+    updatePutts();
+}
+
+function removePutt() {
+    const holesData = currentRound.holes[hn];
+    holesData.putts.pop(); //removes last element
     updatePutts();
 }
 
@@ -37,4 +43,5 @@ function updatePutts() {
     const holesData = currentRound.holes[hn];
     let putts = holesData.putts.length;
     document.getElementById('putts').textContent = putts;
+    console.log(currentRound);
 }
