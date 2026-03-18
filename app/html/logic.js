@@ -147,7 +147,7 @@
         document.getElementById("holeNumber").textContent = hn + 1;
         updatePutts();
 
-        //need to fix this so it doesnt only use edgewood.
+        // need to fix this so it doesnt only use edgewood.
         // if (!holesData || !map) return;
         // // Use hn (current hole number) to access the correct hole
         // const hole = holesData["edgewood"][hn];

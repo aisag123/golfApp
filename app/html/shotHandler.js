@@ -31,7 +31,7 @@ function addPutt() {
     const holesData = currentRound.holes[hn];
     holesData.putts.push({
         type: 'putt',
-        timestamp: new Date().toString()
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true})
     });
     console.log(`Added putt to hole ${hn + 1}:`);
     // console.log("stored course name: " + courseName);
@@ -48,7 +48,36 @@ function updatePutts() {
     const holesData = currentRound.holes[hn];
     let putts = holesData.putts.length;
     document.getElementById('putts').textContent = putts;
-    console.log(currentRound);
+    // console.log(currentRound);
+    updateTotalShots();
+}
+
+function startShot(shotType, Slat, Slon) {
+    localStorage.setItem("startShot_lat", Slat);
+    localStorage.setItem("startShot_lon", Slon);
+    localStorage.setItem("startShot_type", shotType);
+}
+
+function endShot(Elat, Elon) {
+    const Slat = localStorage.getItem("startShot_lat");
+    const Slon = localStorage.getItem("startShot_lon");
+    const shotType = localStorage.getItem("startShot_type");
+    distance = getDistanceFromLastShot(Slat, Slon, Elat, Elon);
+
+    const holesData = currentRound.holes[hn];
+    holesData.shots.push({
+        type: `${shotType}`, //club
+        start: {lat: Slat, lon: Slon},
+        end: {lat: Elat, lon: Elon},
+        distance: distance,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true})
+    })
+
+    localStorage.removeItem("startShot_lat");
+    localStorage.removeItem("startShot_lon");
+    localStorage.removeItem("startShot_type");
+
+    console.log(`Added shot to hole ${hn + 1}:`, holesData.shots[holesData.shots.length - 1]);
     updateTotalShots();
 }
 
