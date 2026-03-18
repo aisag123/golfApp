@@ -1,4 +1,5 @@
 let currentRound = null;
+let shotStarted = false;
 
 function initializeRound() {
 currentRound = {
@@ -52,13 +53,29 @@ function updatePutts() {
     updateTotalShots();
 }
 
-function startShot(shotType, Slat, Slon) {
+function getShotStatus() {
+    if (shotStarted) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function startShot(shotType = "shot") {
+    shotStarted = true;
+    Slat = watchPositionLat;
+    Slon = watchPositionLon;
+
     localStorage.setItem("startShot_lat", Slat);
     localStorage.setItem("startShot_lon", Slon);
     localStorage.setItem("startShot_type", shotType);
+    
 }
 
-function endShot(Elat, Elon) {
+function endShot() {
+    Elat = watchPositionLat;
+    Elon = watchPositionLon;
+
     const Slat = localStorage.getItem("startShot_lat");
     const Slon = localStorage.getItem("startShot_lon");
     const shotType = localStorage.getItem("startShot_type");
@@ -79,6 +96,7 @@ function endShot(Elat, Elon) {
 
     console.log(`Added shot to hole ${hn + 1}:`, holesData.shots[holesData.shots.length - 1]);
     updateTotalShots();
+    shotStarted = false;
 }
 
 function updateTotalShots() {
