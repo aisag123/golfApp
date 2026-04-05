@@ -92,6 +92,6 @@ async def delete_all_rounds(db: db_dependency):
 
 @app.get("/known-holes")
 async def get_holes():
-    knownHoles = KnownHoles()
+    engine = StatsEngine()
     holes = engine.postKnownHoles()
     return holes
