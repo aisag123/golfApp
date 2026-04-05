@@ -76,8 +76,8 @@
                 }
                 userLocation = L.marker([watchPositionLat, watchPositionLon], {icon: dot}).addTo(map);
                 // map.setView([lat, lon], 19); //pulls map to current location
-                getDistanceFromTee(holesData, lat, lon) 
-                getDistanceFromGreen(holesData, lat, lon)
+                getDistanceFromTee(holesData, watchPositionLat, watchPositionLon) 
+                getDistanceFromGreen(holesData, watchPositionLat, watchPositionLon)
               },
             function(error) {
               console.error("Error getting location:", error);
@@ -114,7 +114,7 @@
             // marker = L.marker([lat, lon], {icon: customIcon}).addTo(map);
           });
 
-          // moveToHole(); //call moveToHole after map and icons are initialized 
+          moveToHole(); //call moveToHole after map and icons are initialized 
           // this updates the hole info on load in
 
         } catch (error) {
