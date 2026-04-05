@@ -76,8 +76,10 @@
                 }
                 userLocation = L.marker([watchPositionLat, watchPositionLon], {icon: dot}).addTo(map);
                 // map.setView([lat, lon], 19); //pulls map to current location
-                // getDistanceFromTee(holesData, lat, lon)
-                // getDistanceFromGreen(holesData, lat, lon)
+                distfromtee = getDistanceFromTee(holesData, lat, lon)
+                console.log(distfromtee + " yards from tee");
+                distfromgreen = getDistanceFromGreen(holesData, lat, lon)
+                console.log(distfromgreen + " yards from green");
               },
             function(error) {
               console.error("Error getting location:", error);
@@ -152,10 +154,10 @@
         // if (!holesData || !map) return;
         // // Use hn (current hole number) to access the correct hole
         const hole = holesData["edgewood"][hn];
-        if (hole) {
-          distance = getDistanceFromTee(holesData, watchPositionLat, watchPositionLon);
-          console.log(distance + " yards from tee");
-        }
+        // if (hole) {
+        //   distance = getDistanceFromTee(holesData, watchPositionLat, watchPositionLon);
+        //   console.log(distance + " yards from tee");
+        // }
         // console.log('Current hole:', hn, hole);
         // if (hole) {
         //   map.setView([hole.lat, hole.lon], 19);
