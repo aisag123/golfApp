@@ -76,6 +76,8 @@
                 }
                 userLocation = L.marker([watchPositionLat, watchPositionLon], {icon: dot}).addTo(map);
                 // map.setView([lat, lon], 19); //pulls map to current location
+                getDistanceFromTee(holesData, lat, lon) 
+                getDistanceFromGreen(holesData, lat, lon)
               },
             function(error) {
               console.error("Error getting location:", error);
@@ -110,10 +112,6 @@
             // }
             
             // marker = L.marker([lat, lon], {icon: customIcon}).addTo(map);
-            distfromtee = getDistanceFromTee(holesData, lat, lon) 
-            console.log(distfromtee + " yards from tee");
-            distfromgreen = getDistanceFromGreen(holesData, lat, lon)
-            console.log(distfromgreen + " yards from green");    
           });
 
           // moveToHole(); //call moveToHole after map and icons are initialized 
