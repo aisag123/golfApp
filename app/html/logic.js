@@ -145,8 +145,9 @@
         document.getElementById("holePar").textContent = p;
         document.getElementById("holeNumber").textContent = hn + 1;
         updatePutts();
-        getDistanceFromTee(holesData, watchPositionLat, watchPositionLon); 
-        getDistanceFromGreen(holesData, watchPositionLat, watchPositionLon);
+        if (!watchPositionLat || !watchPositionLon) return;
+        getDistanceFromTee(holesData, watchPositionLat, watchPositionLon) 
+        getDistanceFromGreen(holesData, watchPositionLat, watchPositionLon)
 
         // need to fix this so it doesnt only use edgewood.
         // if (!holesData || !map) return;
