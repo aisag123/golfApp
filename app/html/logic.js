@@ -205,7 +205,7 @@
       function getDistanceFromTee(holesData, latC, lonC) {
         var course = holesData["edgewood"]; //hard coded edgewood here
         var courseHole = course[HN]; //grabs from global
-        var startCoordinate = L.latLng(courseHole[0].lat, courseHole[0].lon) //test
+        var startCoordinate = L.latLng(courseHole.lat, courseHole.lon) //test
         var endCoordinate = L.latLng(latC, lonC); //last click
           var distanceMeters = startCoordinate.distanceTo(endCoordinate);
           var distanceyards = (distanceMeters * 1.09361).toFixed(0);
