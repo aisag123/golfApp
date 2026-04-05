@@ -76,10 +76,6 @@
                 }
                 userLocation = L.marker([watchPositionLat, watchPositionLon], {icon: dot}).addTo(map);
                 // map.setView([lat, lon], 19); //pulls map to current location
-                distfromtee = getDistanceFromTee(holesData, lat, lon)
-                console.log(distfromtee + " yards from tee");
-                // distfromgreen = getDistanceFromGreen(holesData, lat, lon)
-                // console.log(distfromgreen + " yards from green");
               },
             function(error) {
               console.error("Error getting location:", error);
@@ -114,8 +110,10 @@
             // }
             
             // marker = L.marker([lat, lon], {icon: customIcon}).addTo(map);
-            // getDistanceFromTee(holesData, lat, lon)
-            // getDistanceFromGreen(holesData, lat, lon)
+            distfromtee = getDistanceFromTee(holesData, lat, lon) 
+            console.log(distfromtee + " yards from tee");
+            distfromgreen = getDistanceFromGreen(holesData, lat, lon)
+            console.log(distfromgreen + " yards from green");    
           });
 
           // moveToHole(); //call moveToHole after map and icons are initialized 
@@ -204,7 +202,7 @@
 
       function getDistanceFromTee(holesData, latC, lonC) {
         var course = holesData["edgewood"]; //hard coded edgewood here
-        var courseHole = course[HN]; //grabs from global
+        var courseHole = course[hn]; //grabs from global
         var startCoordinate = L.latLng(courseHole.lat, courseHole.lon) //test
         var endCoordinate = L.latLng(latC, lonC); //last click
           var distanceMeters = startCoordinate.distanceTo(endCoordinate);
@@ -216,7 +214,7 @@
 
       function getDistanceFromGreen(holesData, latC, lonC) {
         var course = holesData["edgewood"]; //hard coded edgewood here
-        var courseGreen = course[HN]["green"]; //grabs from global
+        var courseGreen = course[hn]["green"]; //grabs from global
         var startCoordinate = L.latLng(latC, lonC);
         var endCoordinate = L.latLng(courseGreen.lat, courseGreen.lon);
           var distanceToHoleMeters = startCoordinate.distanceTo(endCoordinate);
