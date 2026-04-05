@@ -62,6 +62,7 @@ function getShotStatus() {
 }
 
 function startShot(shotType = "shot") {
+    console.log("shot started");
     shotStarted = true;
     Slat = watchPositionLat;
     Slon = watchPositionLon;

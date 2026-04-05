@@ -116,7 +116,8 @@
             // getDistanceFromGreen(holesData, lat, lon)
           });
 
-          // moveToHole(); //call moveToHole after map and icons are initialized
+          // moveToHole(); //call moveToHole after map and icons are initialized 
+          // this updates the hole info on load in
 
         } catch (error) {
           console.error("Error creating session:", error);
@@ -150,7 +151,11 @@
         // need to fix this so it doesnt only use edgewood.
         // if (!holesData || !map) return;
         // // Use hn (current hole number) to access the correct hole
-        // const hole = holesData["edgewood"][hn];
+        const hole = holesData["edgewood"][hn];
+        if (hole) {
+          distance = getDistanceFromTee(holesData, watchPositionLat, watchPositionLon);
+          console.log(distance + " yards from tee");
+        }
         // console.log('Current hole:', hn, hole);
         // if (hole) {
         //   map.setView([hole.lat, hole.lon], 19);

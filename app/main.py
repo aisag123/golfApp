@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from app.models.statsEngine import StatsEngine
+from app.models.knownHoles import KnownHoles
 import os
 
 app = FastAPI()
@@ -91,6 +92,6 @@ async def delete_all_rounds(db: db_dependency):
 
 @app.get("/known-holes")
 async def get_holes():
-    engine = StatsEngine()
+    knownHoles = KnownHoles()
     holes = engine.postKnownHoles()
     return holes
