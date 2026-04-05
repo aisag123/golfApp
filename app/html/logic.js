@@ -78,8 +78,8 @@
                 // map.setView([lat, lon], 19); //pulls map to current location
                 distfromtee = getDistanceFromTee(holesData, lat, lon)
                 console.log(distfromtee + " yards from tee");
-                distfromgreen = getDistanceFromGreen(holesData, lat, lon)
-                console.log(distfromgreen + " yards from green");
+                // distfromgreen = getDistanceFromGreen(holesData, lat, lon)
+                // console.log(distfromgreen + " yards from green");
               },
             function(error) {
               console.error("Error getting location:", error);
@@ -205,7 +205,7 @@
       function getDistanceFromTee(holesData, latC, lonC) {
         var course = holesData["edgewood"]; //hard coded edgewood here
         var courseHole = course[HN]; //grabs from global
-        var startCoordinate = L.latLng(courseHole.lat, courseHole.lon) //test
+        var startCoordinate = L.latLng(courseHole[0].lat, courseHole[0].lon) //test
         var endCoordinate = L.latLng(latC, lonC); //last click
           var distanceMeters = startCoordinate.distanceTo(endCoordinate);
           var distanceyards = (distanceMeters * 1.09361).toFixed(0);
