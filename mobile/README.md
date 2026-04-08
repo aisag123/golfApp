@@ -4,7 +4,7 @@ This folder now contains a Capacitor scaffold for wrapping the hosted web app.
 
 ## What it does
 
-- Uses your live app URL: `https://golfapp-fv7m.onrender.com`
+- Uses your live app URL: `https://golfapp-1-o233.onrender.com`
 - Lets you generate an iOS project from this repository
 
 ## Setup

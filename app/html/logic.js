@@ -1,7 +1,4 @@
       const API_KEY = "AIzaSyBFZGBYyxfoOy7RTtfog3jRz6PC4mrkpn8";
-      const API_BASE_URL = (window.APP_CONFIG && window.APP_CONFIG.API_BASE_URL)
-        ? window.APP_CONFIG.API_BASE_URL
-        : "https://golfapp-1-o233.onrender.com";
       let map;
       let holesData;
       let marker; //var for current location marker
@@ -22,7 +19,7 @@
 
       async function initMap() {
         // Fetch known holes
-        const response = await fetch(`${API_BASE_URL}/known-holes`);
+        const response = await fetch("https://golfapp-1-o233.onrender.com/known-holes");
         holesData = await response.json();
         console.log(holesData);
         // const holeLocation = holesData["edgewood"]; //hard code edgewood for now, will need to be dynamic later
@@ -148,7 +145,7 @@
         document.getElementById("holePar").textContent = p;
         document.getElementById("holeNumber").textContent = hn + 1;
         updatePutts();
-        if (!watchPositionLat || !watchPositionLon) return;
+        if (!watchPositionLat || !watchPositionLon) return;   
         getDistanceFromTee(holesData, watchPositionLat, watchPositionLon) 
         getDistanceFromGreen(holesData, watchPositionLat, watchPositionLon)
 

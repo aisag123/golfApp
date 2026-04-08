@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'AS Golf',
   webDir: '../web',
   server: {
-    url: 'https://golfapp-fv7m.onrender.com',
+    url: 'https://golfapp-1-o233.onrender.com',
     cleartext: false,
     androidScheme: 'https'
   }
